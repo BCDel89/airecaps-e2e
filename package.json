@@ -1,9 +1,13 @@
 {
   "name": "airecaps-e2e",
   "version": "1.0.0",
-  "description": "Playwright E2E tests for AI Recaps staging",
+  "description": "Playwright E2E tests for AI Recaps",
   "scripts": {
     "test": "playwright test",
+    "test:staging": "cp .env.staging .env && playwright test",
+    "test:prod": "cp .env.production .env && playwright test",
+    "test:api": "playwright test --project=api",
+    "test:browser": "playwright test --project=browser",
     "report": "playwright show-report",
     "clean": "rm -rf .auth playwright-report test-results"
   },
