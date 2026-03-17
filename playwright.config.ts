@@ -12,7 +12,7 @@ export default defineConfig({
   projects: [
     {
       name: 'api',
-      testMatch: /0[1-5]-.*\.spec\.ts/,
+      testMatch: /0[1-9]-.*\.spec\.ts/,
       use: {
         baseURL: process.env.API_URL || 'http://api-recaps-staging.100-85-168-42.sslip.io',
         extraHTTPHeaders: { 'Content-Type': 'application/json' },
