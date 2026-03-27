@@ -4,7 +4,7 @@ import * as path from 'path';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-const API_URL = process.env.API_URL || 'http://api-recaps-staging.100-85-168-42.sslip.io';
+const API_URL = process.env.API_URL || 'https://api-staging.airecaps.com';
 
 async function globalSetup() {
   const authDir = path.join(__dirname, '.auth');

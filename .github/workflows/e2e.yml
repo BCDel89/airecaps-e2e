@@ -11,44 +11,38 @@ on:
         options:
           - staging
           - production
-  schedule:
-    # Run against production daily at 6 AM UTC
-    - cron: '0 6 * * *'
 
 jobs:
   e2e:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
 
       - name: Install Playwright browsers
-        run: npx playwright install chromium
+        run: npx playwright install --with-deps chromium
 
       - name: Set environment
-        run: |
-          if [ "${{ github.event.inputs.environment }}" = "production" ] || [ "${{ github.event_name }}" = "schedule" ]; then
-            cp .env.production .env
-            echo "Testing against PRODUCTION"
-          else
-            cp .env.staging .env
-            echo "Testing against STAGING"
-          fi
+        run: cp .env.${{ github.event.inputs.environment || 'staging' }} .env
 
       - name: Run E2E tests
         run: npx playwright test
+        env:
+          CI: true
 
-      - name: Upload test report
+      - name: Upload test results
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: playwright-report
+          name: playwright-report-${{ github.event.inputs.environment || 'staging' }}
           path: playwright-report/
           retention-days: 7

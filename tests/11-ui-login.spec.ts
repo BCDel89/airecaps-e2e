@@ -8,11 +8,13 @@ test.describe('UI - Login', () => {
     await page.goto('/login');
     await page.waitForSelector('ion-input[formcontrolname="email"]', { timeout: 15000 });
 
-    await page.locator('ion-input[formcontrolname="email"]').click();
-    await page.locator('ion-input[formcontrolname="email"]').locator('input').fill(state.email);
+    await page.locator('ion-input[formcontrolname="email"] input').click();
+    await page.keyboard.type(state.email);
+    await page.keyboard.press('Tab');
 
-    await page.locator('ion-input[formcontrolname="password"]').click();
-    await page.locator('ion-input[formcontrolname="password"]').locator('input').fill(state.password);
+    await page.locator('ion-input[formcontrolname="password"] input').click();
+    await page.keyboard.type(state.password);
+    await page.keyboard.press('Tab');
 
     await page.locator('ion-button[type="submit"]').click();
 
@@ -31,8 +33,14 @@ test.describe('UI - Login', () => {
     await page.goto('/login');
     await page.waitForSelector('ion-input[formcontrolname="email"]', { timeout: 15000 });
 
-    await page.locator('ion-input[formcontrolname="email"]').locator('input').fill('notexist@bad.com');
-    await page.locator('ion-input[formcontrolname="password"]').locator('input').fill('WrongPass999!');
+    await page.locator('ion-input[formcontrolname="email"] input').click();
+    await page.keyboard.type('notexist@bad.com');
+    await page.keyboard.press('Tab');
+
+    await page.locator('ion-input[formcontrolname="password"] input').click();
+    await page.keyboard.type('WrongPass999!');
+    await page.keyboard.press('Tab');
+
     await page.locator('ion-button[type="submit"]').click();
 
     // Should stay on login page (not redirect to tabs)

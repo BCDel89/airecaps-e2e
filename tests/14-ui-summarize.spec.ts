@@ -15,8 +15,8 @@ test.describe('UI - Summarize Now', () => {
     await page.goto('/tabs/summarize');
     await page.waitForSelector('ion-input[formcontrolname="videoSearch"]', { timeout: 15000 });
 
-    await page.locator('ion-input[formcontrolname="videoSearch"]').click();
-    await page.locator('ion-input[formcontrolname="videoSearch"]').locator('input').fill('tech news');
+    await page.locator('ion-input[formcontrolname="videoSearch"] input').click();
+    await page.keyboard.type('tech news');
     await page.keyboard.press('Enter');
 
     // Wait for results to appear (app-video-item components or any result)

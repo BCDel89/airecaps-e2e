@@ -1,9 +1,8 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-export const API_URL = process.env.API_URL || 'http://api-recaps-staging.100-85-168-42.sslip.io';
-export const TRANSCRIPT_URL = process.env.TRANSCRIPT_URL || ''; // Empty in production (native transcription)
-export const FE_URL = process.env.FE_URL || 'http://ai-recaps-staging.100-85-168-42.sslip.io';
+export const API_URL = process.env.API_URL || 'https://api-staging.airecaps.com';
+export const FE_URL = process.env.FE_URL || 'https://staging.airecaps.com';
 
 export interface AuthState {
   email: string;

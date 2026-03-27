@@ -8,17 +8,20 @@ test.describe('UI - Registration', () => {
     await page.goto('/registration');
     await page.waitForSelector('ion-input[formcontrolname="email"]', { timeout: 15000 });
 
-    // Fill email
-    await page.locator('ion-input[formcontrolname="email"]').click();
-    await page.locator('ion-input[formcontrolname="email"]').locator('input').fill(email);
+    // Type email (keyboard.type triggers Angular reactive form change detection)
+    await page.locator('ion-input[formcontrolname="email"] input').click();
+    await page.keyboard.type(email);
+    await page.keyboard.press('Tab');
 
-    // Fill password
-    await page.locator('ion-input[formcontrolname="password"]').click();
-    await page.locator('ion-input[formcontrolname="password"]').locator('input').fill(password);
+    // Type password
+    await page.locator('ion-input[formcontrolname="password"] input').click();
+    await page.keyboard.type(password);
+    await page.keyboard.press('Tab');
 
-    // Fill confirm password
-    await page.locator('ion-input[formcontrolname="confirmPassword"]').click();
-    await page.locator('ion-input[formcontrolname="confirmPassword"]').locator('input').fill(password);
+    // Type confirm password
+    await page.locator('ion-input[formcontrolname="confirmPassword"] input').click();
+    await page.keyboard.type(password);
+    await page.keyboard.press('Tab');
 
     // Wait for password validation chips to go green
     await page.waitForTimeout(500);
