@@ -25,14 +25,14 @@ test.describe('Subscriptions', () => {
     // Get Basic plan
     const subsRes = await ctx.get(`${API_URL}/api/subscriptions`);
     const subscriptions = await subsRes.json();
-    const basicPlan = subscriptions.find((s: any) => s.id === 'youtube-basic');
-    expect(basicPlan).toBeDefined();
+    const paidPlan = subscriptions.find((s: any) => s.id === 'youtube-premium' || s.id === 'youtube-basic');
+    expect(paidPlan).toBeDefined();
     
     // Create payment intent
     const res = await ctx.post(`${API_URL}/api/subscriptions/create-stripe-payment-intent`, {
       headers: authHeaders(token),
       data: {
-        subscriptionId: basicPlan.id,
+        subscriptionId: paidPlan.id,
         currency: "USD"
       }
     });
