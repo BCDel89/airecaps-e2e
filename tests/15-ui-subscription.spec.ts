@@ -12,10 +12,10 @@ test.describe('UI Subscription Flow', () => {
     await page.goto(`${FE_URL}/tabs/subscriptions`);
     await page.waitForLoadState('networkidle');
     
-    // Verify plans are displayed
-    await expect(page.getByText('Free')).toBeVisible();
-    await expect(page.getByText('Basic')).toBeVisible();
-    await expect(page.getByText('Premium')).toBeVisible();
+    // Verify plans are displayed (use first() to avoid strict mode violation if text appears in nav)
+    await expect(page.getByText('Free').first()).toBeVisible();
+    await expect(page.getByText('Basic').first()).toBeVisible();
+    await expect(page.getByText('Premium').first()).toBeVisible();
   });
 
   test('upgrade to Basic plan with test card', async ({ page }) => {
